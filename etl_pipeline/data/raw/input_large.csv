@@ -1,0 +1,11 @@
+employee_id,employee_name,department,vacation_start,vacation_end,absences,status
+101.0,Ana,RH,2024-07-01,2024-07-10,2,ativo
+102.0,Carlos,Financeiro,2024-07-10,2024-07-20,0,ativo
+103.0,Maria,TI,2024-07-15,2024-07-25,1,ativo
+104.0,João,RH,,,0,ativo
+,Patrícia,TI,2024-07-20,2024-07-30,3,ativo
+106.0,Rafael,Marketing,2024-07-05,2024-07-15,0,ativo
+107.0,Juliana,Financeiro,2024-07-25,2024-08-05,1,ativo
+108.0,Caio,RH,2024-08-01,2024-08-10,4,ativo
+109.0,Fernanda,TI,2024-08-10,2024-08-20,2,ativo
+110.0,Lucas,Marketing,2024-08-15,2024-08-25,0,ativo
