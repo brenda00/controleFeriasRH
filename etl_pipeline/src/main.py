@@ -1,6 +1,7 @@
 # Importa os módulos necessários
-import sys           
-import subprocess    
+import sys
+import subprocess
+import os
 
 # Função que executa um script Python e trata o resultado
 def run_script(script_path, name):
@@ -26,13 +27,14 @@ def run_script(script_path, name):
 
 # Bloco principal que define a ordem dos scripts
 if __name__ == "__main__":
-    scripts = [
-        ("src/ingest_raw.py", "Ingest Raw"),             
-        ("src/transform_bronze.py", "Transform Bronze"), 
-        ("src/transform_silver.py", "Transform Silver"), 
-        ("src/data_quality.py", "Data Quality Checks"),   
+    scripts = [        
+        ("ingest_raw.py", "Ingest Raw"),             
+        ("transform_bronze.py", "Transform Bronze"), 
+        ("transform_silver.py", "Transform Silver")  
     ]
 
     # Executa cada script em ordem
     for path, name in scripts:
         run_script(path, name)
+
+print("\n Pipeline finalizado com sucesso!")

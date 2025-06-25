@@ -1,23 +1,32 @@
 from pyspark.sql import SparkSession
+from pyspark.sql.functions import col
 
-def ingest():
-    # 1. Cria sessão Spark, necessária para usar DataFrames
-    spark = SparkSession.builder.appName("ingest_raw").getOrCreate()
+def process_raw_to_bronze():
+    spark = SparkSession.builder.appName("bronze_ingest").getOrCreate()
 
-    dir_csv = "data/raw/input_large.csv"
+    # Caminho do CSV gerado na camada raw
+    input_csv = "../data/raw/input_large.csv"
+    # Caminho para salvar os arquivos Parquet diretamente na bronze
+    output_parquet = "../data/bronze"
 
-    # 2. Lê arquivo Excel e converte em DataFrame
-    df = spark.read.format("csv") \
-        .option("header", "true") \
-        .option("inferSchema", "true") \
-        .load(dir_csv) \
+    # Lê o CSV da camada raw
+    df = spark.read.option("header", True).option("inferSchema", True).csv(input_csv)
 
+    # Tratamentos típicos para camada bronze
+    df_bronze = (
+        df.dropna(how="all")
+          .withColumn("absences", col("absences").cast("int"))
+          .withColumn("employee_id", col("employee_id").cast("int"))
+          .fillna({"absences": 0})
+          .dropDuplicates()
+    )
 
-    # 3. Grava o DataFrame como CSV na pasta bronze
-    df.write.mode("overwrite").csv("data/bronze/points.csv", header=True)
+    # Salva como Parquet diretamente na pasta bronze
+    df_bronze.write.mode("overwrite").parquet(output_parquet)
 
-    # 4. Encerra a sessão Spark para liberar recursos
+    print(f"Dados bronze salvos em {output_parquet}")
+
     spark.stop()
 
 if __name__ == "__main__":
-    ingest()
+    process_raw_to_bronze()
