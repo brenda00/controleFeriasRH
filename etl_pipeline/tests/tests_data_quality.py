@@ -1,12 +1,19 @@
 import pytest
 from pyspark.sql import SparkSession
 from pyspark.sql import Row
-from src import data_quality  
+import sys
+import os
+
+# Garante que o src está no path para importação
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../src")))
+from src import data_quality
 
 # Define uma fixture para criar uma SparkSession que será reutilizada nos testes
 @pytest.fixture(scope="session")
 def spark():
-    return SparkSession.builder.master("local").appName("pytest").getOrCreate()
+    spark = SparkSession.builder.master("local").appName("pytest").getOrCreate()
+    yield spark
+    spark.stop()
 
 # Testa a função que verifica valores nulos em colunas específicas
 def test_null_check(spark):
@@ -21,6 +28,7 @@ def test_negative_hours_check(spark):
     df = spark.createDataFrame(data)
     result = data_quality.check_negative_hours(df, "hours")
     assert result == 1  # Espera 1 valor negativo na coluna "hours"
+
 
 # Testa se o schema do DataFrame corresponde ao esperado
 def test_schema_validation(spark):
