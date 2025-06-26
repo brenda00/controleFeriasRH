@@ -1,0 +1,21 @@
+# Ignore virtual environment folders
+venv/
+.env/
+ENV/
+env/
+venv311/
+.vscode/    
+
+
+# Ignore Parquet files
+*.parquet
+
+# Ignore Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore VSCode
