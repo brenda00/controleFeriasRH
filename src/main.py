@@ -28,9 +28,9 @@ def run_script(script_path, name):
 # Bloco principal que define a ordem dos scripts
 if __name__ == "__main__":
     scripts = [        
-        ("ingest_raw.py", "Ingest Raw"),             
-        ("transform_bronze.py", "Transform Bronze"), 
-        ("transform_silver.py", "Transform Silver")  
+        ("scr/ingest_raw.py", "Ingest Raw"),             
+        ("scr/transform_bronze.py", "Transform Bronze"), 
+        ("scr/transform_silver.py", "Transform Silver")  
     ]
 
     # Executa cada script em ordem
