@@ -1,13 +1,14 @@
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col
+import os
 
 def process_raw_to_bronze():
     spark = SparkSession.builder.appName("bronze_ingest").getOrCreate()
 
-    # Caminho do CSV gerado na camada raw
-    input_csv = "data/raw/input_large.csv"
-    # Caminho para salvar os arquivos Parquet diretamente na bronze
-    output_parquet = "data/bronze"
+    # Caminho absoluto para o CSV na camada raw
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    input_csv = os.path.join(base_dir, "data", "raw", "input_large.csv")
+    output_parquet = os.path.join(base_dir, "data", "bronze")
 
     # Lê o CSV da camada raw
     df = spark.read.option("header", True).option("inferSchema", True).csv(input_csv)
