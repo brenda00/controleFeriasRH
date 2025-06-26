@@ -28,7 +28,7 @@ jobs:
         pip install -r requirements.txt
 
     - name: Executar pipeline ETL
-      run: python main.py  # Roda o script principal do pipeline
+      run: python src/main.py  # Corrigido o caminho para src/main.py
 
     - name: Executar testes unitários
-      run: pytest tests/   # Roda todos os testes dentro da pasta "tests"
+      run: pytest
