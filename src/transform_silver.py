@@ -8,10 +8,10 @@ def silver_to_gold():
     spark = SparkSession.builder.appName("silver_to_gold").getOrCreate()
 
     # Caminho para ler os arquivos Parquet da silver
-    silver_path = "../data/silver"
+    silver_path = "data/silver"
     # Caminho para salvar o relatório gold
-    gold_dir = "../data/gold/employee_hours_temp"
-    gold_file = "../data/gold/employee_hours.csv"
+    gold_dir = "data/gold/employee_hours_temp"
+    gold_file = "data/gold/employee_hours.csv"
 
     # Lê os dados da silver
     df_silver = spark.read.parquet(silver_path)
