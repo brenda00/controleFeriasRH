@@ -53,8 +53,8 @@ def silver_to_gold():
     df_gold.coalesce(1).write.mode("overwrite").option("header", True).csv(gold_dir)
 
     # Move o CSV gerado para um nome fixo na pasta gold
-    temp_csv = glob.glob(os.path.join(gold_dir, "*.csv"))[0]
-    shutil.move(temp_csv, gold_file)
+    temp_csvs = glob.glob(os.path.join(gold_dir, "*.csv"))[0]
+    shutil.move(temp_csvs, gold_file)
     shutil.rmtree(gold_dir)
 
     print(f"Gold salvo em: {gold_file}")
