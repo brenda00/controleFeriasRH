@@ -37,4 +37,4 @@ if __name__ == "__main__":
     for path, name in scripts:
         run_script(path, name)
 
-print("\n Pipeline finalizado com sucesso!")
+print("\n Pipeline finalizado com sucesso!!!!")
