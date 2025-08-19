@@ -58,7 +58,7 @@ def process_raw_to_bronze():
     # Salva os dados em Parquet com particionamento por data
     df_bronze.write.mode("overwrite").parquet(output_parquet)
 
-    print(f"Dados bronze salvos em: {output_parquet}")
+    print(f"Dados bronze salvos: {output_parquet}")
 
     # Finaliza a sessão Spark
     spark.stop()
